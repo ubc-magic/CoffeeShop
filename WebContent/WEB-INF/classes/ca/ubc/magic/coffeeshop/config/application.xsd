@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
+            xmlns="http://pspi.magic.ubc.ca"
+            targetNamespace="http://pspi.magic.ubc.ca"
+            elementFormDefault="qualified"
+            jxb:version="2.0">
+
+<xsd:complexType name="application">
+  <xsd:sequence>
+    <xsd:element name="applicationName" type="xsd:string" nillable="false" maxOccurs="1"/>
+    <xsd:element name="applicationShortName" type="xsd:string" nillable="false" maxOccurs="1"/>
+    <xsd:element name="applicationImageURL" type="xsd:string" nillable="false" maxOccurs="1"/>
+    <xsd:element name="minumumIdleTime" type="xsd:int" nillable="false" maxOccurs="1"/>
+    <xsd:element name="applicationDescription" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+    <xsd:element name="interactionInstructions" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+    <xsd:element name="connectionInfo" type="connection" nillable="false"/>
+    <xsd:element name="parameters" type="parameters" minOccurs="0" maxOccurs="1"/>
+  </xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name="connection">
+	<xsd:sequence>
+		<xsd:element name="topic" type="xsd:string" nillable="false" maxOccurs="1"/>
+		<xsd:element name="displayURL" type="xsd:string" minOccurs="0"/>
+		<xsd:element name="connectorClass" type="xsd:string" minOccurs="1" default="ca.ubc.magic.coffeeshop.connectors.DefaultConnector"/>
+	</xsd:sequence>
+	<xsd:attribute name="applicationType" use="required">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="web"/>
+				<xsd:enumeration value="swf"/>
+		    </xsd:restriction>
+	    </xsd:simpleType>
+	</xsd:attribute>
+	<xsd:attribute name="useFullScreen" use="required">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="true"/>
+				<xsd:enumeration value="false"/>
+		    </xsd:restriction>
+		   </xsd:simpleType>
+	</xsd:attribute>
+</xsd:complexType>
+
+<xsd:complexType name="parameters">
+	<xsd:sequence>
+		<xsd:choice minOccurs="0" maxOccurs="unbounded">
+	    	<xsd:element name="textbox" type="textbox"/>
+			<xsd:element name="textarea" type="textarea"/>
+			<xsd:element name="password" type="password"/>
+			<xsd:element name="radioList" type="radioList"/>
+			<xsd:element name="checkboxList" type="checkboxList"/>
+			<xsd:element name="listbox" type="listbox"/>
+	    </xsd:choice>
+    </xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name="parameter">
+	<xsd:sequence>
+		<xsd:element name="order" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+	</xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name="textbox">
+	<xsd:complexContent>
+		<xsd:extension base="parameter">
+			<xsd:sequence>
+				<xsd:element name="label" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+			</xsd:sequence>
+		</xsd:extension>
+	</xsd:complexContent>
+</xsd:complexType>
+
+<xsd:complexType name="textarea">
+	<xsd:complexContent>
+		<xsd:extension base="parameter">
+			<xsd:sequence>
+				<xsd:element name="label" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+			</xsd:sequence>
+		</xsd:extension>
+	</xsd:complexContent>
+</xsd:complexType>
+
+<xsd:complexType name="password">
+	<xsd:complexContent>
+		<xsd:extension base="parameter">
+			<xsd:sequence>
+				<xsd:element name="label" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+			</xsd:sequence>
+		</xsd:extension>
+	</xsd:complexContent>
+</xsd:complexType>
+
+<xsd:complexType name="radioList">
+	<xsd:complexContent>
+		<xsd:extension base="parameter">
+			<xsd:sequence>
+				<xsd:element name="label" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+			</xsd:sequence>
+		</xsd:extension>
+	</xsd:complexContent>
+</xsd:complexType>
+
+<xsd:complexType name="checkboxList">
+	<xsd:complexContent>
+		<xsd:extension base="parameter">
+			<xsd:sequence>
+				<xsd:element name="label" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+			</xsd:sequence>
+		</xsd:extension>
+	</xsd:complexContent>
+</xsd:complexType>
+
+<xsd:complexType name="listbox">
+	<xsd:complexContent>
+		<xsd:extension base="parameter">
+			<xsd:sequence>
+				<xsd:element name="label" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+			</xsd:sequence>
+		</xsd:extension>
+	</xsd:complexContent>
+</xsd:complexType>
+
+<xsd:element name="pluginApp" type="application"/>
+
+</xsd:schema>

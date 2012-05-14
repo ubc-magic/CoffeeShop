@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pluginApp xmlns="http://pspi.magic.ubc.ca"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://pspi.magic.ubc.ca application.xsd">
+           
+    <applicationName>Video Wall</applicationName>
+    <applicationShortName>videowall</applicationShortName>
+    <applicationImageURL>http://kimberly.magic.ubc.ca:8080/CoffeeShop/img/video.png</applicationImageURL>
+    <minumumIdleTime>10</minumumIdleTime>
+    <connectionInfo applicationType="web" useFullScreen="false">
+        <topic>cs_videowall</topic>
+        <displayURL>http://pspi.magic.ubc.ca:8080/VideoWallLDSD/VideoWallLDSD.swf</displayURL>
+        <connectorClass></connectorClass>
+    </connectionInfo>
+    
+</pluginApp>

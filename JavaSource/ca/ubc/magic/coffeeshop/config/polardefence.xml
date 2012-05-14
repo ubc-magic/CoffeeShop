@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pluginApp xmlns="http://pspi.magic.ubc.ca"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://pspi.magic.ubc.ca application.xsd">
+           
+    <applicationName>Polar Defence</applicationName>
+    <applicationShortName>polardefence</applicationShortName>
+    <applicationImageURL>http://kimberly.magic.ubc.ca:8080/CoffeeShop/img/defence.png</applicationImageURL>
+    <minumumIdleTime>10</minumumIdleTime>
+    
+    <applicationDescription>This game allows you to defend a land of penguins from the evil polar bears.</applicationDescription>
+    <interactionInstructions>You will need to download the phone client here: http://www.somebogusurl.com/
+    This phone client is a Flash Lite 3.0 program wrapped in Adobe's Mobile Packager and has only been tested for the Nokia N95 (both versions of the Nokia N95)
+    To change the mode the parent application is in, right click on the Flash application and select "Set xx Mode" where xx is the mode you would like to set the parent application to, note that this does not persist so you need to set it everytime, the default mode is LD mode
+    You can check the mode after setting it by hovering your mouse over the bottom right hand corner of the application - where there is a little flap
+    </interactionInstructions>
+    
+    <connectionInfo applicationType="web" useFullScreen="true">
+        <topic>cs_defence</topic>
+        <displayURL>http://pspi.magic.ubc.ca:8080/PolarDefence/LD/</displayURL>
+        <connectorClass></connectorClass>
+    </connectionInfo>
+    
+</pluginApp>

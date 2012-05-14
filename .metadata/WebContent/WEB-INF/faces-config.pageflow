@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf12690215095250" configfile="/CoffeeShop/WebContent/WEB-INF/faces-config.xml">
+  <nodes xsi:type="pageflow:PFPage" name="/client/config.jsf" id="pf12701634962670" referenceLink="//@navigationRule.2/@fromViewId|" outlinks="pf12701634962671 pf12706702880710" inlinks="pf12701634962671 pf12706021911940" path="/client/config.jsf"/>
+  <nodes xsi:type="pageflow:PFPage" name="/client/vieweditapp.jsf" id="pf12706021911951" referenceLink="//@navigationRule.2/@navigationCase.0/@toViewId|" outlinks="pf12706021911940" inlinks="pf12706702880710" path="/client/vieweditapp.jsf"/>
+  <links id="pf12701634962671" target="pf12701634962670" source="pf12701634962670" outcome="NAV_HERE"/>
+  <links id="pf12706021911940" target="pf12701634962670" source="pf12706021911951" outcome="NAV_CONFIG"/>
+  <links id="pf12706702880710" target="pf12706021911951" source="pf12701634962670" outcome="NAV_VIEWEDIT"/>
+</pageflow:Pageflow>

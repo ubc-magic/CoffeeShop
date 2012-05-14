@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pluginApp xmlns="http://pspi.magic.ubc.ca"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://pspi.magic.ubc.ca application.xsd">
+           
+    <applicationName>Magic Beans</applicationName>
+    <applicationShortName>magicbeans</applicationShortName>
+    <applicationImageURL>http://kimberly.magic.ubc.ca:8080/CoffeeShop/img/magicbeans.png</applicationImageURL>
+    <minumumIdleTime>20</minumumIdleTime>
+    
+    <applicationDescription>This application lets you interact with people in your community.</applicationDescription>
+    <interactionInstructions>You need to visit beans.icd.magic.ubc.ca</interactionInstructions>
+    
+    <connectionInfo applicationType="web" useFullScreen="false">
+        <topic>cs_magicbeans</topic>
+        <displayURL>http://kimberly.magic.ubc.ca/ld/index.html</displayURL>
+        <connectorClass>ca.ubc.magic.coffeeshop.connectors.MagicBeansConnector</connectorClass>
+    </connectionInfo>
+    
+</pluginApp>

@@ -1,0 +1,59 @@
+<!-- Based on the code by http://jquerymobile.com/ -->
+
+<!DOCTYPE html>
+<html>
+<head>
+
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title> Mobile demo</title>  
+  <script type='text/javascript' src='http://code.jquery.com/jquery-1.6.2.js'></script>
+  <script type="text/javascript" src="http://code.jquery.com/mobile/1.0b2/jquery.mobile-1.0b2.js"></script>
+  <link rel="stylesheet" type="text/css" href="http://code.jquery.com/mobile/1.0b2/jquery.mobile-1.0b2.min.css">
+  
+  <style type='text/css'>
+  </style>
+  
+  <script type='text/javascript'>
+    $(window).load(function(){
+      $("#listitem").swiperight(function() {
+        $.mobile.changePage("#page1");
+        $.ajax({ type: "GET", url: "sendevent.php" });
+      });
+    });
+
+</script>
+
+</head>
+<body>
+  <div data-role="page" id="home"> 
+    <div data-role="content">
+
+	<p>Welcome to your mobile-web application.</p>
+        <p>
+            <ul data-role="listview" data-inset="true" data-theme="c">
+                <li id="listitem">Swipe Right to send an Event to the Display</li>
+            </ul>
+        </p>
+    </div>
+</div>
+
+<div data-role="page" id="page1"> 
+    <div data-role="content">
+        
+        <ul data-role="listview" data-inset="true" data-theme="c">
+            <li data-role="list-divider">Congratulations</li> 
+            <li><a href="#home">Back to the Home Page</a></li>
+        </ul>
+        
+        <p>
+          YAY!<br/>You Swiped Right and sent an event.
+        </p>
+    </div>
+</div>
+  
+</body>
+
+
+</html>
+

@@ -1,0 +1,112 @@
+<html>
+  <head>
+
+    <link type="text/css" href="css/coffeeshop.css" rel="stylesheet" />	
+
+    <script type="text/javascript" src="js/jquery-1.6.2.min.js"></script>
+<!--     <script type="text/javascript" src="js/jquery-ui-1.8.16.custom.min.js"></script> -->
+<!--     <link rel="stylesheet" href="css/ui-lightness/jquery-ui-1.8.16.custom.css"> -->
+
+    <script>
+      $(document).ready(function(){
+	  	
+	  	//MAGIC Deployment
+		//$.ajax({ type: "GET", url: "http://kimberly.magic.ubc.ca:8080/CoffeeShop/communication.do?type=configuration", dataType: "xml", success: configurationParser });
+		$.ajax({ type: "GET", url: "http://localhost:8080/CoffeeShop/communication.do?type=configuration", dataType: "xml", success: configurationParser });
+		
+        setInterval(function () {
+		//MAGIC Deployment
+		//$.ajax({ type: "GET", url: "http://kimberly.magic.ubc.ca:8080/CoffeeShop/coffeeShop.do", dataType: "xml", success: changeApp });
+		//$.ajax({ type: "GET", url: "http://kimberly.magic.ubc.ca:8080/CoffeeShop/communication.do", dataType: "xml", success: changeApp });		
+	    //$.ajax({ type: "GET", url: "http://kimberly.magic.ubc.ca:8080/CoffeeShop/communication.do?type=queued", dataType: "xml", success: queueParser });
+	    //$.ajax({ type: "GET", url: "http://kimberly.magic.ubc.ca:8080/CoffeeShop/messageBoard.do", dataType: "xml", success: messageParser });
+
+		//DEMO out of the box
+		// NOTE: java does not allow cross-domain calls, i.e. visiting foo.com:8080/CoffeeShop, and making a js call to server.com:8080/CoffeeShop. 
+		// if you're deploying this for remote use (not using localhost:8080/CoffeeShop) make sure that you use the proper domain name.
+		// If you note in the MAGIC Deployment above, we use the actual url where the CoffeeShop app is deployed.		
+		$.ajax({ type: "GET", url: "http://localhost:8080/CoffeeShop/communication.do", dataType: "xml", success: changeApp });
+	    $.ajax({ type: "GET", url: "http://localhost:8080/CoffeeShop/communication.do?type=queued", dataType: "xml", success: queueParser });
+	    $.ajax({ type: "GET", url: "http://localhost:8080/CoffeeShop/messageBoard.do", dataType: "xml", success: messageParser });
+		
+        }, 5000);
+      });
+
+    function changeApp(xml) {
+        var iframe = $('#frame');
+	if ( $(xml).find("application").find("url").text() ){
+		$(iframe).attr('src', $(xml).find("application").find("url").text());
+	}
+    }
+
+    function queueapp(number) {
+       $.ajax({
+         //MAGIC Deployment
+         //url: 'http://broker.magic.ubc.ca:8800/osgibroker/subscribe?topic=device.sms.6043760732.in&clientID=socialwall',
+         url: 'http://localhost:8800/osgibroker/subscribe?topic=device.sms.6043760732.in&clientID=socialwall',
+         type: 'GET',
+		 dataType: 'jsonp',
+         crossDomain: true,
+       });
+
+       $.ajax({
+         //MAGIC Deployment
+         //url: 'http://broker.magic.ubc.ca:8800/osgibroker/event?topic=device.sms.6043760732.in&clientID=socialwall&_method=POST&from=%22604778344%22&message=select%20'+number,
+         url: 'http://localhost:8800/osgibroker/event?topic=device.sms.6043760732.in&clientID=socialwall&_method=POST&from=%22604778344%22&message=select%20'+number,
+         type: 'GET',
+		 dataType: 'jsonp',
+         crossDomain: true,
+       });
+    }
+
+    function configurationParser(xml) {
+        $(".available").empty();
+        var appNum = 0;
+        $(xml).find("application").each(function () {
+          appNum = appNum + 1;
+          $(".available").append('<img src=' + $(this).find("img").text() + ' onclick="queueapp('+appNum+')">');
+        });
+    }
+
+
+    function queueParser(xml) {
+	$(".queued").empty();
+	$(xml).find("application").each(function () {
+ 	  $(".queued").append('<img src=' + $(this).find("img").text() + '>');
+    	});
+    }
+
+    function messageParser(xml) {
+
+	$(xml).find("event").each(function () {
+ 	  //$(".messages").append( '<h3><br>' + $(this).find("name").text() + ' says: <br>' +$(this).find("message").text()) + '<br></h3>';
+	  $(".messages").append('<div class="message">' + $(this).find("name").text() + ' says:' + $(this).find("message").text() +'</div>');
+    	});
+
+        if ($(".messages").find('div').length > 4 ){
+	  $(".messages").find('div').slice(0,1).remove();
+	}
+    }
+  </script>
+
+  </head>
+  <body>
+
+    <div id="board">
+        <!-- MAGIC Deployment
+		<div id="app"><iframe src="http://kimberly.magic.ubc.ca/socialwall/" id="frame" width="650" height="380" frameBorder="0"></iframe></div>
+		-->
+		<div id="app"><iframe src="http://localhost/hello/" id="frame" width="650" height="380" frameBorder="0"></iframe></div>
+		<div id="sidebar">
+	  		<div class="available"></div>
+	  		<div class="queued"></div>	 
+ 		</div>
+		<div id="messageboard"><div class="messages"><div class="message">Welcome to MAGIC!.</div></div> </div>
+    </div>    	
+    <!-- MAGIC 	DEPLOYMENT
+    <div id="footer">Text to (604) 616-3424 with "say [your message]" to post a message, or  "select [1-4] to select an app."</div>
+    -->
+	<div id="footer">Text to [change me in index.html] with "say [your message]" to post a message, or  "select [1-4] to select an app."</div>
+	
+  </body>
+</html>

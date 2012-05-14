@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+  <display-name>CoffeeShop</display-name>
+  
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+  </welcome-file-list>
+  
+  <!-- Servlet Definitions -->
+  <servlet>
+    <servlet-name>MessageBoard</servlet-name>
+    <servlet-class>ca.ubc.magic.coffeeshop.servlets.MessageBoardServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MessageBoard</servlet-name>
+    <url-pattern>/messageBoard.do</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>CoffeeShopServlet</servlet-name>
+    <servlet-class>ca.ubc.magic.coffeeshop.servlets.CoffeeShopServlet</servlet-class>
+        <load-on-startup>0</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CoffeeShopServlet</servlet-name>
+    <url-pattern>/coffeeShop.do</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>CommunicationServlet</servlet-name>
+    <servlet-class>ca.ubc.magic.coffeeshop.servlets.CommunicationServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CommunicationServlet</servlet-name>
+    <url-pattern>/communication.do</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>FacesServlet</servlet-name>
+    <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FacesServlet</servlet-name>
+    <url-pattern>*.jsf</url-pattern>
+  </servlet-mapping>
+  
+  <!-- Error Pages -->
+  <error-page>
+    <error-code>404</error-code>
+    <location>/errorpages/pagenotfound.jsf</location>
+  </error-page>
+  <error-page>
+    <exception-type>java.lang.RuntimeException</exception-type>
+    <location>/errorpages/configuration.jsf</location>
+  </error-page>
+  
+  <!-- Context Parameters -->
+  <context-param>
+	<param-name>javax.faces.DEFAULT_SUFFIX</param-name>
+	<param-value>.jsf</param-value>
+  </context-param>
+  
+  <context-param>
+    <description>State saving method: 'client' or 'server' (=default). See JSF Specification 2.5.2</description>
+    <param-name>javax.faces.STATE_SAVING_METHOD</param-name>
+    <param-value>client</param-value>
+  </context-param>
+  
+  <context-param>
+    <param-name>javax.servlet.jsp.jstl.fmt.localizationContext</param-name>
+    <param-value>resources.application</param-value>
+  </context-param>
+  
+  <!-- Listeners -->
+  <listener>
+    <listener-class>com.sun.faces.config.ConfigureListener</listener-class>
+  </listener>
+  
+  <!-- Filters -->
+  <!-- Defining and mapping the RichFaces filter -->
+  <filter> 
+	<display-name>RichFaces Filter</display-name> 
+	<filter-name>richfaces</filter-name> 
+	<filter-class>org.ajax4jsf.Filter</filter-class> 
+  </filter> 
+  <filter-mapping> 
+	<filter-name>richfaces</filter-name> 
+	<servlet-name>FacesServlet</servlet-name>
+	<dispatcher>REQUEST</dispatcher>
+	<dispatcher>FORWARD</dispatcher>
+	<dispatcher>INCLUDE</dispatcher>
+  </filter-mapping>
+  
+</web-app>

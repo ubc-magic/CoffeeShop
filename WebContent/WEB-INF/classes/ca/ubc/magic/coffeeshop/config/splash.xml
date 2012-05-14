@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pluginApp xmlns="http://pspi.magic.ubc.ca"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://pspi.magic.ubc.ca application.xsd">
+           
+    <applicationName>Splash!</applicationName>
+    <applicationShortName>splash</applicationShortName>
+    <applicationImageURL>http://people.rit.edu/andpph/photofile-c/splash-4.jpg</applicationImageURL>
+    <minumumIdleTime>10</minumumIdleTime>
+    
+    <applicationDescription>The pet of our application.</applicationDescription>
+    
+    <connectionInfo applicationType="web" useFullScreen="false">
+        <topic>cs_splash</topic>
+        <displayURL>http://redhead.magic.ubc.ca/index.html</displayURL>
+        <connectorClass></connectorClass>
+    </connectionInfo>
+    
+</pluginApp>

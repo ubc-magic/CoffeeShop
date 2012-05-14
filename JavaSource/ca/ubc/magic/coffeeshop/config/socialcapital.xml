@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pluginApp xmlns="http://pspi.magic.ubc.ca"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://pspi.magic.ubc.ca application.xsd">
+           
+    <applicationName>Social Capital</applicationName>
+    <applicationShortName>socialcapital</applicationShortName>
+    <applicationImageURL>http://kimberly.magic.ubc.ca:8080/CoffeeShop/img/socialwall.png</applicationImageURL>
+    <minumumIdleTime>20</minumumIdleTime>
+    
+    <applicationDescription>This application lets you interact with people in your community.</applicationDescription>
+    <interactionInstructions>You need to send messages through twitter.</interactionInstructions>
+    
+    <connectionInfo applicationType="web" useFullScreen="false">
+        <topic>cs_socialwall</topic>
+        <displayURL>http://kimberly.magic.ubc.ca/social-capital-viz/index.html</displayURL>
+        <connectorClass>ca.ubc.magic.coffeeshop.connectors.SocialCapitalConnector</connectorClass>
+    </connectionInfo>
+    
+</pluginApp>

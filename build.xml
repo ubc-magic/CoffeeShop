@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<project name="CoffeeShop" basedir="." default="build">
+	
+	<!-- Build variables -->
+	<property name="source.dir" location="${basedir}/JavaSource"/>
+	<property name="build.dir" location="${basedir}/buildfiles"/>
+	<property name="compile.dest.dir" location="${basedir}/WebContent/WEB-INF/classes" />
+	<property name="webinf.location" location="${basedir}/WebContent/WEB-INF"/>
+	<property name="gui.project" location="../guiFramework"/>
+	
+	<!-- File Paths -->
+	<property name="config.package.location" location="${source.dir}/ca/ubc/magic/coffeeshop/config"/>
+	<property name="config.package.dest" location="${compile.dest.dir}/ca/ubc/magic/coffeeshop/config"/>
+	
+	<!-- Define the classpath for building -->
+	<path id="files-classpath">  
+	    <fileset dir="${webinf.location}/lib" >  
+	        <include name="*.jar"/>  
+	    </fileset>
+	</path>  
+	
+	<!-- Create build directories -->
+	<target name="init">
+		<echo>Creating build directories...</echo>
+	    <mkdir dir="${compile.dest.dir}"/>
+	</target>
+	
+	<!-- Compile source files -->
+	<target name="compile" depends="init">
+		<echo>Compiling source files...</echo>
+		<!-- Compile source -->
+		<javac srcdir="${source.dir}" destdir="${compile.dest.dir}" >
+			<classpath>  
+				<path refid="files-classpath" />  
+			</classpath> 
+		</javac>
+		<!-- Move Configuration Files -->
+		<copy todir="${config.package.dest}">
+			<fileset dir="${config.package.location}"/>
+		</copy>
+		<copy todir="${compile.dest.dir}" file="${source.dir}/log4j.properties"/>
+	</target>
+	
+	<!-- Build GUI and import -->
+	<!-- RVCA: DEPRECATED. THE GUI IS NOW CONTAINED WITHIN THIS PROJECT
+	<target name="inject-gui">
+		
+		<echo>Building GUI...</echo>		
+		<ant antfile="${gui.project}/build.xml" dir="${gui.project}" target="build"/>
+		<echo>Importing files...</echo>
+		<copy file="${gui.project}/build/containerAppGUI.swf" todir="WebContent"/>		
+	</target>
+	-->
+
+	<!-- Build war file -->
+	<target name="build" depends="compile">
+		<!-- Build war file -->
+		<mkdir dir="dist"/>
+		<echo>Creating war file in dist...</echo>
+		<war destfile="${ant.project.name}.war" webxml="${webinf.location}/web.xml">
+			<lib dir="${webinf.location}/lib"/>
+			<classes dir="${compile.dest.dir}" />
+			<webinf file="${webinf.location}/faces-config.xml"/>
+			<fileset dir="WebContent" excludes="META-INF/,WEB-INF/"/>
+		</war>
+		
+		<!-- Move do dist directory -->
+		<move todir="dist">
+			<fileset file="${ant.project.name}.war"/>
+		</move>
+		
+		<!-- Clean the compiled files 
+		<echo>Removing build files...</echo>
+		<delete dir="${build.dir}"/> -->
+	</target>
+	
+	<!-- Clean compiled files-->
+	<target name="clean">
+		<!-- <echo>Cleaning build files...</echo>
+		<delete dir="${build.dir}"/> -->
+	</target>
+	
+	
+	<!-- Clean all files -->
+	<target name="cleanall" depends="clean">
+		<!--<delete dir="dist"/> -->
+	</target>
+	
+</project>

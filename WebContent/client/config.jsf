@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	  xmlns:c="http://java.sun.com/jsp/jstl/core"
+	  xmlns:f="http://java.sun.com/jsf/core" 
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>CoffeeShop Configuration</title>
+<link href="#{configBean.cssFile}" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+<div id="wrap">
+<div id="header"/>
+<f:view>
+	
+	<rich:dragIndicator id="indicator" />
+	
+	<div id="leftlarge">
+	
+	<h:form>
+	<h:commandButton id="save1_id" value="Save" action="#{configBean.doSaveAction}"/>
+	<h:commandButton id="cancel2_id" value="Create New Application" action="#{configBean.doNewAppAction}"/>
+	<br /><br />
+	
+	<h:outputText id="inst_id" value="Drap and drop applcations to moave them from section to section."/><br /><br />
+	<rich:panel id="defaultTable_id">
+		<f:facet name="header">
+			<h:outputLabel id="defaultTableLabel_id"	value="Default Application"/>
+		</f:facet>
+		<rich:dropSupport id="dropAreaConfig_id" acceptedTypes="CONFIG_APP" reRender="configuredTable_id,defaultTable_id" dropListener="#{configBean.doProcessDefaultDrop}"/>
+		<h:dataTable id="configured_list_id" value="#{configBean.defaultApp}" var="app">
+			<h:column>
+				<a4j:outputPanel id="#{app.applicationShortName}ConfigPanel_id" >
+                    
+                    <h:panelGrid id="#{app.applicationShortName}CondigInfo_id" columns="2">
+                    	<h:graphicImage id="#{app.applicationShortName}Img_id" url="#{app.applicationImageURL}" width="60" height="60" />
+						<h:outputLabel id="#{app.applicationShortName}Name_id" value="#{app.applicationName}" styleClass="label"/>
+					</h:panelGrid>
+					
+				</a4j:outputPanel>
+			</h:column>
+		</h:dataTable>
+	</rich:panel>
+	
+	<br /><br />
+	
+	<rich:panel id="configuredTable_id">
+		<f:facet name="header">
+			<h:outputLabel id="configuredTableLabel_id"	value="Currently Configured Applications"/>
+		</f:facet>
+		<rich:dropSupport id="dropAreaConfig_id" acceptedTypes="APP,DEF_APP" reRender="configuredTable_id,availableAppls_id" dropListener="#{configBean.doProcessConfigDrop}"/>
+		<h:dataTable id="configured_list_id" cellpadding="10" value="#{configBean.configuredApps}" var="app" binding="#{configBean.configuredTable}">
+			<h:column>
+				<a4j:outputPanel id="#{app.applicationShortName}ConfigPanel_id" >
+					<rich:dragSupport dragIndicator=":indicator" dragType="CONFIG_APP" dragValue="#{app}">
+                    	<rich:dndParam name="label" value="#{app.applicationName}" />
+                    </rich:dragSupport>
+                     
+                    <h:panelGrid id="#{app.applicationShortName}CondigInfo_id" columns="6" cellpadding="10">
+                    	<h:outputLabel id="#{app.applicationShortName}Num_id" value="#{configBean.configuredTable.rowIndex+1}"/>
+                    	<h:graphicImage id="#{app.applicationShortName}Img_id" url="#{app.applicationImageURL}" width="60" height="60" />
+						<h:outputLabel id="#{app.applicationShortName}Name_id" value="#{app.applicationName}" styleClass="label"/>
+					</h:panelGrid>
+					
+				</a4j:outputPanel>
+			</h:column>
+			<h:column><h:commandLink id="#{app.applicationShortName}Edit_id" value="View/Edit" action="#{configBean.doViewEditConfiguredAction}"/></h:column>
+			<h:column><h:commandLink id="#{app.applicationShortName}moveup_id" value="#{configBean.configuredTable.rowIndex==0?'':'Move Up'}" action="#{configBean.doMoveUpAction}"/></h:column>
+			<h:column><h:commandLink id="#{app.applicationShortName}movedown_id" value="#{configBean.configuredTable.rowIndex==configBean.configuredTable.rowCount-1?'':'Move Down'}" action="#{configBean.doMoveDownAction}"/></h:column>
+		</h:dataTable>
+	</rich:panel>
+	
+	<br /><br />
+	
+	<rich:panel id="availableAppls_id">
+		<f:facet name="header">
+			<h:outputLabel id="configuredTableLabel_id"	value="Available Applications"/>
+		</f:facet>
+		<rich:dropSupport id="dropAreaAll_id" acceptedTypes="CONFIG_APP" reRender="configuredTable_id,availableAppls_id" dropListener="#{configBean.doProcessAllDrop}"/>
+		<h:dataTable id="configured_list_id" cellpadding="10" value="#{configBean.allApps}" var="app" binding="#{configBean.allAppTable}" >
+			<h:column>
+				<a4j:outputPanel id="#{app.applicationShortName}AllPanel_id" >
+					<rich:dragSupport dragIndicator=":indicator" dragType="APP" dragValue="#{app}">
+                    	<rich:dndParam name="label" value="#{app.applicationName}" />
+                    </rich:dragSupport>
+                    <h:panelGrid id="#{app.applicationShortName}CondigInfo_id" columns="3" cellpadding="10">
+                     	<h:graphicImage id="#{app.applicationShortName}Img_id" url="#{app.applicationImageURL}" width="60" height="60" />
+				 		<h:outputLabel id="#{app.applicationShortName}Name_id" value="#{app.applicationName}" styleClass="label" />
+				 	</h:panelGrid>
+				</a4j:outputPanel>
+			</h:column>
+			<h:column><h:commandLink id="#{app.applicationShortName}Edit_id" value="View/Edit" action="#{configBean.doViewEditAllAction}"/></h:column>
+		</h:dataTable>
+	</rich:panel>
+	
+	<br />
+	<h:commandButton id="save2_id" value="Save" action="#{configBean.doSaveAction}"/>
+	<h:commandButton id="cancel2_id" value="Create New Application" action="#{configBean.doNewAppAction}"/>
+	</h:form>
+	</div>
+	
+</f:view>
+</div>
+
+</body>
+</html>

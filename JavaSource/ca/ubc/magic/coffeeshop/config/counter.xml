@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pluginApp xmlns="http://pspi.magic.ubc.ca"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://pspi.magic.ubc.ca application.xsd">
+           
+    <applicationName>Counter</applicationName>
+    <applicationShortName>counter</applicationShortName>
+    <applicationImageURL>http://localhost/counter/counter.png</applicationImageURL>
+    <minumumIdleTime>20</minumumIdleTime>
+    
+    <applicationDescription>This application is a sample application.</applicationDescription>
+    <interactionInstructions>Visit the Large-Mobile guide.</interactionInstructions>
+    
+    <connectionInfo applicationType="web" useFullScreen="false">
+        <topic>hello</topic>
+        <displayURL>http://localhost/counter/large/index.html</displayURL>
+        <connectorClass>ca.ubc.magic.coffeeshop.connectors.CounterConnector</connectorClass>
+    </connectionInfo>
+    
+</pluginApp>

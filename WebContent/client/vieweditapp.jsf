@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	  xmlns:c="http://java.sun.com/jsp/jstl/core"
+	  xmlns:f="http://java.sun.com/jsf/core" 
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>CoffeeShop Configuration</title>
+<link href="#{configBean.cssFile}" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+<div id="wrap">
+<div id="header"/>
+<f:view>
+	<div id="leftlarge">
+	<h:messages id="messages_id" styleClass="failure"/>
+	
+	<span class="required">*</span>
+	<h:outputLabel id="required_id" styleClass="label" value="Required Field"/><br /><br />
+	<h:form>
+		<h:panelGrid id="form_grid_id" columns="3">
+			<span class="required">*</span>
+			<h:outputLabel id="appNameLabel_id" styleClass="label" value="Application Name: "/>
+			<h:inputText id="appNameInput_id" value="#{configBean.appName}" size="50" />
+			
+			<span class="required">*</span>
+			<h:outputLabel id="appShortNameLabel_id" styleClass="label" value="Application Short Name: "/>
+			<h:inputText id="appShortNameInput_id" size="50" value="#{configBean.appShortName}" rendered="#{empty configBean.appShortName}"/>
+			<h:outputText id="appShortNameInput_id" value="#{configBean.appShortName}" rendered="#{not empty configBean.appShortName}"/>
+			
+			<span class="required">*</span>
+			<h:outputLabel id="appImageUrlLabel_id" styleClass="label" value="Application Image URL: "/>
+			<h:inputText id="appImageUrlInput_id" size="50" value="#{configBean.appImageUrl}" >
+				<a4j:support event="onblur" reRender="appImage"/>
+			</h:inputText>
+			
+			<span/>
+			<h:outputLabel id="appImageLabel_id" styleClass="label" value="Image Preview: "/>
+			<h:graphicImage id="appImage" url="#{empty configBean.appImageUrl?'/img/no_image.gif':configBean.appImageUrl}" width="100" height="100"/>
+			
+			<span/>
+			<h:outputLabel id="appIdleLabel_id" styleClass="label" value="Minimum Idle Time (seconds): "/>
+			<rich:inputNumberSlider id="appIdleTimeInput_id"  value="#{configBean.appIdleTime}" minValue="0" maxValue="300" step="1"
+					enableManualInput="true"/>
+			
+			<span/>
+			<h:outputLabel id="appDescLabel_id" styleClass="label" value="Application Description: "/>
+			<h:inputTextarea id="appDescInput_id" value="#{configBean.appDescription}" cols="40" rows="5"/>
+			
+			<span/>
+			<h:outputLabel id="appInstLabel_id" styleClass="label" value="Application Instructions: "/>
+			<h:inputTextarea id="appInstInput_id" value="#{configBean.appInstructions}" cols="40" rows="5"/>
+			
+			<span/>
+			<h:outputLabel id="appTypeLabel_id" styleClass="label" value="Application Type: "/>
+			<h:selectOneRadio  id="appTypeinput_id" value="#{configBean.appType}">
+				<f:selectItem id="swfItem" itemLabel="Flash (SWF File)" itemValue="swf"/>
+				<f:selectItem id="webItem" itemLabel="Web Page" itemValue="web"/>
+			</h:selectOneRadio>
+			
+			<span/>
+			<h:outputLabel id="appfullLabel_id" styleClass="label" value="Fullscreen: "/>
+			<h:selectBooleanCheckbox id="appfullinput_id" value="#{configBean.appFullscreen}"/>
+			
+			<span class="required">*</span>
+			<h:outputLabel id="apptopicLabel_id" styleClass="label" value="OSGiBroker Topic Name: "/>
+			<h:inputText id="apptopicInput_id" size="50" value="#{configBean.appTopicName}" />
+			
+			<span class="required">*</span>
+			<h:outputLabel id="appURLLabel_id" styleClass="label" value="Application URL: "/>
+			<h:inputText id="appURLInput_id" size="50" value="#{configBean.appDisplayUrl}" />
+			
+			<span class="required">*</span>
+			<h:outputLabel id="appconnLabel_id" styleClass="label" value="Fully Qualified Connector Name: "/>
+			<h:inputText id="appconnInput_id" size="50" value="#{configBean.appConnectorClass}" />
+			
+		</h:panelGrid>
+		<h:commandButton id="id_submit" value="Save" action="#{configBean.doCreateApplicationAction}" rendered="#{configBean.createNew}"/>
+		<h:commandButton id="id_submit" value="Save" action="#{configBean.doSaveViewEditAction}" rendered="#{!configBean.createNew}"/>
+		<h:commandButton id="id_submit" value="Cancel" action="#{configBean.doCancelAction}" />
+	</h:form>
+	</div>
+	
+</f:view>
+</div>
+
+</body>
+</html>

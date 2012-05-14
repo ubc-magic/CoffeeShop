@@ -1,0 +1,23 @@
+#board { margin-top: 20px; margin-left: auto; margin-right:auto; width:730px; height:400px;background: #00FFFF;}
+
+#board #app { background: #00FF00; display:table-cell; width:650px; height:400px; float:left;}
+
+#board #sidebar { display:table-cell; background:#FFFFFF; width:80px; height:400px; float:right;}
+
+#board #sidebar .available {height:300px; width:80px; margin-top: 5px; margin-left: auto; margin-right:auto;}
+#board #sidebar .available img {width:80px; height:80px; float:left;}
+
+#board #sidebar .queued {height:30px; width:80px; margin-top:5px; margin-left:auto; margin-right:auto;}
+#board #sidebar .queued img {width:20px; height:20px; float:left;}
+
+#messageboard {height:50px; width: 800px; margin-top: 5px; margin-left: auto; margin-right:auto;}
+#messageboard .messages {}
+#messageboard .message { min-width: 100px;  max-width: 120px; height: 50px; padding: 2px; margin-top: 10px; margin-left:10px; margin-right:10px; font-size: small; border: 1px solid #444; background: #fff; color: #333; float:left;}
+
+#footer {font-size:9px; padding-top:5px; text-align:center;}
+
+a { color: #4B82B1; font-weight:bold; text-decoration:none;}
+
+a:hover { text-decoration:underline;}
+
+body { background: #FFFFFF; color:#000000;}

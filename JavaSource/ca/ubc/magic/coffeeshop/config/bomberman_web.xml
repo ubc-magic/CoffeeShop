@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pluginApp xmlns="http://pspi.magic.ubc.ca"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://pspi.magic.ubc.ca application.xsd">
+           
+    <applicationName>Bomberman</applicationName>
+    <applicationShortName>bomberman_web</applicationShortName>
+    <applicationImageURL>http://kimberly.magic.ubc.ca:8080/CoffeeShop/img/bomberman.png</applicationImageURL>
+    <minumumIdleTime>30</minumumIdleTime>
+    <connectionInfo applicationType="web" useFullScreen="false">
+        <topic>cs_bomberman_swf</topic>
+        <displayURL>http://pspi.magic.ubc.ca:8080/Bomberman/</displayURL>
+        <connectorClass></connectorClass>
+    </connectionInfo>
+
+    
+</pluginApp>

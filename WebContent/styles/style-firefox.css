@@ -1,0 +1,105 @@
+@charset "UTF-8";
+/* CSS COFFEE SHOP */
+
+body {		background-image: url("../img/background/background.png");
+			background-repeat:no-repeat;
+			background-attachment: fixed;
+			font-family: Geneva, Arial, Helvetica, sans-serif;
+			color: #FFF;
+			margin-top: 0;
+			font-size: 12px;
+			text-align: center;
+			}
+			
+#wrap {		background-image: url("../img/background/centreback3.png");
+			background-repeat:no-repeat;
+			border-top: none;
+			margin-top: -20px;
+			margin-left: auto;
+			margin-right: auto;
+			width: 950px;
+			height: 1575px;	
+			}
+
+			
+#header {	background-image: url("../img/background/header2.png");
+			background-repeat:no-repeat;
+			width: 915px;
+			height: 249px;
+			text-align: left;
+			}
+
+#right {	text-align: left;
+			position: relative;
+			width: 650px;
+			float: right;
+			height: auto;
+			margin: auto;
+			margin-top: 249px;
+			margin-right: 30px;
+			padding: 0px;
+			padding-top: 0px;
+			color:#000000;
+			}
+
+#left {		text-align: center;
+			position: relative;
+			width: 170px;
+			float: left;
+			height: 600px;
+			margin: auto;
+			margin-left: 30px; 
+			margin-top: 249px;
+			padding: 0px;
+			padding-top: 0px;
+			color:#000000;
+			}
+			
+#leftlarge { text-align: left;
+			position: relative;
+			width: 800px;
+			float: left;
+			height: 600px;
+			margin: auto;
+			margin-left: 30px; 
+			margin-top: 249px;
+			padding: 0px;
+			padding-top: 0px;
+			color:#000000;
+			}
+			
+#middle {	text-align: center;
+			position: relative;
+			width: 770px;
+			float: left;
+			height: auto;
+			margin: auto;
+			margin-top: 249px;
+			margin-left: 30px;
+			padding: 0px;
+			padding-top: 0px;
+			color:#000000;
+			}
+
+.label{ font-weight: bold; }
+
+.title	{	font-weight: bold;
+			font-size: 35px;
+			}
+
+.subtitle { font-weight: bold;
+			font-style: italic;
+			font-size: 20px;
+			}
+			
+.messageTitle{  font-weight: bold;
+				font-size: 20px;
+			}
+			
+.success  {	color: green; }
+
+.failure { color: red; }
+
+.required { color: red;
+			font-weight: bold; 
+		}

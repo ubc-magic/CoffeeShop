@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pluginApp xmlns="http://pspi.magic.ubc.ca"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://pspi.magic.ubc.ca application.xsd">
+           
+    <applicationName>Directory</applicationName>
+    <applicationShortName>directory</applicationShortName>
+    <applicationImageURL>http://kimberly.magic.ubc.ca:8080/CoffeeShop/img/directory.png</applicationImageURL>
+    <minumumIdleTime>20</minumumIdleTime>
+    
+    <applicationDescription>The following is a proposed application to explore direct and indirect mobile phone to large public display interaction in an informational domain for Goal B of the Public Spaces and Personal Interaction (PSPI) project. The application proposed is a large public directory like that of a shopping mall directory, but interactive. Our application aims to be a city directory, listing shops, stores and facilities around downtown Vancouver, which we call venues.</applicationDescription>
+    
+    <interactionInstructions>Click the Flash application to ensure it is focused 
+    Press the ` key (under the tilde key) on your keyboard to bring up the console
+    Type "1,new" (no spaces) into the console to join the application
+    Use the following console commands to interact:
+    "1,up" to move up
+    "1,down" to move down
+    "1,left" to move left
+    "1,right" to move right
+    "1,select" to make a selection
+    "1,back" to deselect/go back
+    "1,remove" to disconnect/remove the user
+    "1,reset" to reset the user
+    "ld" to enable LD mode
+    "ldsd" to enable LDSD mode
+    "in" to zoom in one level
+    "out" to zoom out one level</interactionInstructions>
+    <connectionInfo applicationType="web" useFullScreen="false">
+        <topic>cs_idirectory</topic>
+        <displayURL>http://pspi.magic.ubc.ca:8080/IDirectory/</displayURL>
+        <connectorClass>ca.ubc.magic.coffeeshop.connectors.IdirectoryConnector</connectorClass>
+    </connectionInfo>
+    
+</pluginApp>

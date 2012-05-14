@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	  xmlns:f="http://java.sun.com/jsf/core" 
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>CoffeeShop Client Selection</title>
+<link href="#{inputPageBean.cssFile}" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+<div id="wrap">
+<div id="header"/>
+<f:view>
+
+	<!-- Left Side Bar - Configured Applications -->
+	<div id="left">
+	<h:form id="imageForm_id">
+		<h:dataTable id="appMenu_id" value="#{inputPageBean.applicationList}" binding="#{inputPageBean.dataTable}" var="item" >
+			<f:facet name="header" >
+        		<h:outputText id="appliationMenuTitle" style="font-size: 14px" value="Available Applications:" />
+			</f:facet> 
+			<h:column>
+				<rich:panel id="#{item.applicationShortName}_panel_id">
+			        <a4j:commandLink id="#{item.applicationShortName}_imageLink_id" action="#{inputPageBean.doShowApplication}" reRender="applicationContent_id,applicationForm_id">
+			        	<h:graphicImage id="#{item.applicationShortName}_image_id" url="#{item.applicationImageURL}" width="150" height="150"/>
+			        </a4j:commandLink>
+			     	<h:outputLabel id="#{item.applicationShortName}_label_id" for="#{item.applicationShortName}_image_id" 
+			     					value="#{item.applicationName}" styleClass="label"/>
+			    </rich:panel>
+			</h:column>
+		</h:dataTable>
+	</h:form>
+	</div>
+	
+	<!-- Main Panel - Currently running applications and queueing -->
+	<div id="right">
+	<h:form id="applicationForm_id">
+	<a4j:poll id="currentAppPoller_id" interval="#{inputPageBean.currentApplication.minumumIdleTime*1000}" enabled="#{inputPageBean.pollEnabled}" reRender="applicationContent_id,currentAppPoller_id"/>
+	<h:panelGroup id="applicationContent_id">
+		<h:panelGroup id="appfromMenu_id" rendered="#{inputPageBean.viewMenuSelect}">
+			<h:outputText id="appTitle_id" styleClass="title" value="#{inputPageBean.applicationVisible.applicationName}"/><br />
+			<rich:spacer id="spacer1_id" height="25"/><br />
+			<h:outputText id="appDesc_id" rendered="#{inputPageBean.applicationVisible.applicationDescription!=null}" 
+						  value="#{inputPageBean.applicationVisible.applicationDescription}"/><br />
+			<rich:spacer id="spacer2_id" height="25"/><br />
+			<a4j:commandButton id="queueButton_id" value="Queue this Application to Run" action="#{inputPageBean.doQueueApplication}" reRender="applicationContent_id,currentAppPoller_id,appMenu_id"/>
+			<a4j:commandButton id="cancelButton_id" value="Cancel" action="#{inputPageBean.doCancelAction}" reRender="applicationContent_id,currentAppPoller_id,appMenu_id"/><br />
+			<rich:spacer id="spacer3_id" height="25"/><br />
+		</h:panelGroup>
+		
+		<h:panelGroup id="runningApplication_id" rendered="#{!inputPageBean.viewMenuSelect}">
+			<h:outputText id="runningCurrently_id" styleClass="title" value="Currently Running:"/><br />
+			<h:outputText id="appTitleCurrent_id" styleClass="subtitle" value="#{inputPageBean.currentApplication.applicationName}"/><br />
+			<rich:spacer id="spacer4_id" height="25"/><br />
+			<h:outputText id="appDesc_id" rendered="#{inputPageBean.currentApplication.applicationDescription!=null}" 
+						  value="#{inputPageBean.currentApplication.applicationDescription}"/><br />
+			<rich:spacer id="spacer5_id" height="25"/><br />
+			<h:outputLabel id="instLabel_id" value="Instructions:" styleClass="label" for="appinst_id" 
+						   rendered="#{inputPageBean.currentApplication.interactionInstructions!=null}"/><br />
+			<h:outputText id="appinst_id" rendered="#{inputPageBean.currentApplication.interactionInstructions!=null}" 
+						  value="#{inputPageBean.currentApplication.interactionInstructions}"/><br />
+			<rich:spacer id="spacer6_id" height="25"/><br />
+			
+			
+			<h:panelGrid id="params_id" binding="#{inputPageBean.paramTable}" />
+			
+		</h:panelGroup>
+
+	</h:panelGroup>
+	</h:form>
+	
+	<rich:separator id="main_seperator_id" width=""/>
+	
+	<!-- Message Board -->
+	<h:form id="messageBoardForm_id">
+	<h:panelGroup id="messageBoard_id">
+		<rich:spacer id="spacer7_id" height="25"/><br />
+		<h:outputText id="messageBoard_title_id" styleClass="messageTitle" value="Message Board"/><br />
+		<rich:spacer id="spacer8_id" height="25"/><br />
+		<h:outputText id="messageBoard_desc_id" value="Submit your name and message below to send a message to the large screen message board!"/><br />
+		<rich:spacer id="spacer8_id" height="25"/><br />
+		
+		<h:panelGrid id="messageBoardGrid_id" columns="2">
+			<h:outputLabel id="nameLabel_id" styleClass="label" value="Name (Optional):"/>
+			<h:inputText id="nameBox_id" value="#{inputPageBean.messageName}" size="60"/>
+			<h:outputLabel id="messageLabel_id" styleClass="label" value="Message:"/>
+			<h:inputTextarea id="messageBox_id" value="#{inputPageBean.message}" rows="3" cols="50"/>
+			<f:facet name="footer">
+				<h:outputText id="successMessage" styleClass="#{inputPageBean.messageSuccess?'success':'failure'}" value="#{inputPageBean.messageStatus}"/>
+			</f:facet>
+		</h:panelGrid>
+		<a4j:commandButton id="messageSubmit_id" value="Submit" action="#{inputPageBean.doSubmitMessage}" reRender="messageBoard_id,appMenu_id"/>
+	</h:panelGroup>
+	</h:form>
+	
+	</div>
+	
+</f:view>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pluginApp xmlns="http://pspi.magic.ubc.ca"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://pspi.magic.ubc.ca application.xsd">
+           
+    <applicationName>Contexty</applicationName>
+    <applicationShortName>contexty</applicationShortName>
+    <applicationImageURL>http://kimberly.magic.ubc.ca:8080/CoffeeShop/img/video.png</applicationImageURL>
+    <minumumIdleTime>60</minumumIdleTime>
+    
+    <applicationDescription>Contextual ambient information..</applicationDescription>
+    
+    <connectionInfo applicationType="web" useFullScreen="false">
+        <topic>cs_contexty</topic>
+        <displayURL>http://kimberly.magic.ubc.ca/contexty/index.html</displayURL>
+        <connectorClass></connectorClass>
+    </connectionInfo>
+    
+</pluginApp>
